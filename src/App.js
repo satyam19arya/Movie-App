@@ -21,15 +21,25 @@ function App() {
     apiTesting(); // eslint-disable-next-line
   }, []); 
 
-  const apiTesting = () => {
-    fetchDataFromApi("/movie/popular")
-      .then((data) => {
-        console.log(data);
-        dispatch(getApiConfiguration(data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  // const apiTesting = () => {
+  //   fetchDataFromApi("/movie/popular")
+  //     .then((data) => {
+  //       console.log(data);
+  //       dispatch(getApiConfiguration(data));
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
+
+  const apiTesting = async () => {
+    try{
+      const data = await fetchDataFromApi("/movie/popular");
+      console.log(data);
+      dispatch(getApiConfiguration(data));
+    }catch(error){
+      console.log(error);
+    }
   }
 
   return (
