@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { fetchDataFromApi } from "./utils/api";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getApiConfiguration } from "./redux/slices/homeSlice";
 import { Routes, Route } from "react-router-dom";
 
@@ -15,7 +15,7 @@ import PageNotFound from "./pages/404/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
-  const url = useSelector((state) => state.homeReducer.url);
+  // const url = useSelector((state) => state.homeReducer.url);
 
   useEffect(() => {
     apiTesting(); // eslint-disable-next-line
@@ -34,9 +34,16 @@ function App() {
 
   const apiTesting = async () => {
     try{
-      const data = await fetchDataFromApi("/movie/popular");
+      const data = await fetchDataFromApi("/configuration");
       console.log(data);
-      dispatch(getApiConfiguration(data));
+
+      const url = {
+        backdrop: data.images.secure_base_url + "original",  //not adding / because already / in url (https://image.tmdb.org/t/p/)
+        poster: data.images.secure_base_url + "original",
+        profile: data.images.secure_base_url + "original",
+      }
+      
+      dispatch(getApiConfiguration(url));
     }catch(error){
       console.log(error);
     }
@@ -44,9 +51,9 @@ function App() {
 
   return (
     <>
-      <div className="App">
+      {/* <div className="App">
         {url?.total_pages}
-      </div>
+      </div> */}
       <Header />
       <Routes>
          <Route path="/" element={<Home />} />
