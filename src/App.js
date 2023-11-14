@@ -39,8 +39,6 @@ function App() {
 
       const url = {
         backdrop: data.images.secure_base_url + "original",  //not adding / because already / in url (https://image.tmdb.org/t/p/)
-        poster: data.images.secure_base_url + "original",
-        profile: data.images.secure_base_url + "original",
       }
       
       dispatch(getApiConfiguration(url));

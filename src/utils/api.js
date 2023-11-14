@@ -19,12 +19,3 @@ export const fetchDataFromApi = async (url, params) => {
         return err;
     }
 };
-
-// export const fetchDataFromApi = axios.create({
-//     baseURL: BASE_URL,
-//     headers: {
-//         common: {
-//             Authorization: "Bearer " + TMDB_TOKEN,
-//         }
-//     }
-// })
