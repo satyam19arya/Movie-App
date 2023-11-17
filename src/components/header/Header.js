@@ -21,7 +21,7 @@ const Header = () => {
   },[location]);
 
   const controlNavbar = () => {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     if(window.scrollY > 200){
       if(window.scrollY > lastScrollY && !mobileMenu){
         setShow("hide");
@@ -37,7 +37,7 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
     return () => {
-      window.removeEventListener("scroll", controlNavbar);
+      window.removeEventListener("scroll", controlNavbar);  // to remove the event listener when the component unmounts to avoid memory leaks and performance issues
     }  // eslint-disable-next-line
   }, [lastScrollY]); 
 
